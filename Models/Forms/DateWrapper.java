@@ -1,4 +1,4 @@
-package org.esq.toddrom.CivicGeo.Models.Data;
+package org.esq.toddrom.CivicGeo.Models.Forms;
 
 import java.util.Date;
 
