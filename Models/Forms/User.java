@@ -19,7 +19,8 @@ public class User {
     @NotNull
     private String email;
 
-    Boolean candidate_admin_privileges;
+    private UserAdminType adminType;
+
 
 
     public User() { }
@@ -53,4 +54,17 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public UserAdminType getAdminType() {
+        return adminType;
+    }
+
+    public void setAdminType(UserAdminType adminType) {
+        this.adminType = adminType;
+    }
+
+    public void setAdminType(String adminLevelString) {
+        this.adminType = UserAdminType.valueOf(adminLevelString);
+    }
+
 }
