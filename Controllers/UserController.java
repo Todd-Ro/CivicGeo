@@ -3,6 +3,8 @@ package org.esq.toddrom.CivicGeo.Controllers;
 
 import org.esq.toddrom.CivicGeo.Models.Data.UserDao;
 import org.esq.toddrom.CivicGeo.Models.Forms.User;
+
+import org.esq.toddrom.CivicGeo.Models.Forms.UserAdminType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("users")
@@ -22,6 +23,9 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+
+    //@Autowired
+    //AdminDao adminDao;
 
     @RequestMapping(value= "")
     public String index(Model model) {
@@ -34,17 +38,20 @@ public class UserController {
     public String displayAddUserForm(Model model) {
         model.addAttribute("title", "Add User");
         model.addAttribute(new User());
+        model.addAttribute("admin_types", UserAdminType.values());
         return "users/add_user";
     }
 
     @RequestMapping(value = "add_user", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid User newUser,
-                                          Errors errors, Model model) {
+                                          Errors errors, @RequestParam String adminTypeId, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "add User");
+            model.addAttribute("admin_types", UserAdminType.values());
             return "users/add_user";
         }
 
+        newUser.setAdminType(UserAdminType.valueOf(adminTypeId));
         userDao.save(newUser);
         return "redirect:";
     }
