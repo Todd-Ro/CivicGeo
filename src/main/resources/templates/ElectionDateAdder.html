@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a date to Calendar</title>
+</head>
+<body>
+
+
+    <form method="post" style="max-width:600px;" action="/view_dates">
+        <div class="form-group">
+            <label>Date</label>
+            <input type="datetime-local" name="Date_of_Election" value="2018-11-07T06:00:00"/>
+        </div>
+
+        <input type="submit" value="Press to submit date to add"/>
+
+    </form>
+
+    <p>Dates are in yyyy-mm-dd format. The numbers following the T are local time.</p>
+    <p>If you click the "Submit" button, the form-data will be sent to a page called "/view_dates".</p>
+
+</body>
+</html>

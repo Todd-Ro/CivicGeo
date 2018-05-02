@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Candidate List</h1>
+
+<nav th:replace="fragments :: candidate_navigation"></nav>
+
+<p th:unless="${candidates} and ${candidates.size()}">no candidates</p>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Office</th>
+        <th>Party</th>
+    </tr>
+
+    <tr th:each="candidate : ${candidates}">
+        <td th:text="${candidate.name}"></td>
+        <td th:text="${candidate.office}"></td>
+        <td th:text="${candidate.party}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
