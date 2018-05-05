@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -47,6 +44,37 @@ public class CandidateController {
 
         candidateDao.save(newCandidate);
         return "redirect:";
+    }
+
+
+    @RequestMapping(value = "edit/{candidateId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int candidateId) {
+        model.addAttribute("title", "Edit Candidate");
+        Candidate foundCandidate = candidateDao.findOne(candidateId);
+        model.addAttribute("foundCandidate", foundCandidate);
+        model.addAttribute(new Candidate());
+        return "candidates/edit_candidate";
+    }
+
+    @RequestMapping(value = "edit/{candidateId}", method = RequestMethod.POST)
+    public String processEditForm(Model model,
+                                  @ModelAttribute @Valid Candidate newCandidate,
+                                  Errors errors, @PathVariable int candidateId) {
+
+        if (errors.hasErrors()) {
+            //Basically the same as Get; bring back edit form
+            model.addAttribute("title", "Edit Candidate");
+            Candidate foundCandidate = candidateDao.findOne(candidateId);
+            model.addAttribute("foundCandidate", foundCandidate);
+            model.addAttribute(new Candidate());
+            return "candidates/edit_candidate";
+        }
+        Candidate foundCandidate = candidateDao.findOne(candidateId);
+        foundCandidate.setName(newCandidate.getName());
+        foundCandidate.setParty(newCandidate.getParty());
+        foundCandidate.setOffice(newCandidate.getOffice());
+        candidateDao.save(foundCandidate);
+        return "redirect:/candidates";
     }
 
 }
