@@ -1,5 +1,7 @@
 package org.esq.toddrom.CivicGeo;
 
+import java.util.HashMap;
+
 public class Matching {
 
     public static int MatchCircuit(String County) {
@@ -10,5 +12,7 @@ public class Matching {
             return 22;
         }
     }
+
+    public HashMap<String, Object[]> Counties = new HashMap<String, Object[]>();
 
 }
