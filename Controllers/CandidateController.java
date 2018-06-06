@@ -50,7 +50,7 @@ public class CandidateController {
     @RequestMapping(value = "edit/{candidateId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int candidateId) {
         model.addAttribute("title", "Edit Candidate");
-        Candidate foundCandidate = candidateDao.findOne(candidateId);
+        Candidate foundCandidate = candidateDao.findById(candidateId).orElse(null);
         model.addAttribute("foundCandidate", foundCandidate);
         model.addAttribute(new Candidate());
         return "candidates/edit_candidate";
@@ -64,12 +64,12 @@ public class CandidateController {
         if (errors.hasErrors()) {
             //Basically the same as Get; bring back edit form
             model.addAttribute("title", "Edit Candidate");
-            Candidate foundCandidate = candidateDao.findOne(candidateId);
+            Candidate foundCandidate = candidateDao.findById(candidateId).orElse(null);
             model.addAttribute("foundCandidate", foundCandidate);
             model.addAttribute(new Candidate());
             return "candidates/edit_candidate";
         }
-        Candidate foundCandidate = candidateDao.findOne(candidateId);
+        Candidate foundCandidate = candidateDao.findById(candidateId).orElse(null);
         foundCandidate.setName(newCandidate.getName());
         foundCandidate.setParty(newCandidate.getParty());
         foundCandidate.setOffice(newCandidate.getOffice());
