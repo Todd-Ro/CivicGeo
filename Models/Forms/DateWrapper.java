@@ -8,7 +8,9 @@ import java.util.GregorianCalendar;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class DateWrapper {
 
     @Id
