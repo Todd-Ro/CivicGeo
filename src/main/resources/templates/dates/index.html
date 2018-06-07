@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Date List</h1>
+
+<nav th:replace="fragments :: candidate_navigation"></nav>
+
+<p th:unless="${dates} and ${dates.size()}">no dates entered</p>
+
+<table class="table">
+
+    <tr>
+        <th>Year</th>
+        <th>Month</th>
+        <th>Day</th>
+        <th>Days_Since_Tuesday</th>
+    </tr>
+
+    <tr th:each="date : ${dates}">
+        <td th:text="${date.year}"></td>
+        <td th:text="${date.month}"></td>
+        <td th:text="${date.day}"></td>
+        <td th:text="${date.daysSinceTuesday"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Add Candidate</h1>
+
+<nav th:replace="fragments :: candidate_navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${foundCandidate}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" th:value="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="office">Office</label>
+        <input class="form-control" th:field="*{office}" th:value="*{office}"/>
+        <span th:errors="*{office}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="party">Party</label>
+        <input class="form-control" th:field="*{party}" th:value="*{party}"/>
+        <span th:errors="*{party}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <input clas="form-control" id="candidateId-Field" type="hidden"
+               name="candidateIdField" th:value="${foundCandidate.id}"/>
+    </div>
+
+    <input type="submit" value="Accept Changes to Candidate" />
+</form>
+
+</body>
+</html>
